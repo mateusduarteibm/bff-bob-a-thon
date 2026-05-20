@@ -1,0 +1,1 @@
+web: java -jar bff-bob-a-thon-1.0.0.jar --server.port=5000
