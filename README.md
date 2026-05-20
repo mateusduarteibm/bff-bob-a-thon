@@ -98,9 +98,30 @@ mvn clean install
 
 A aplicação está deployada e disponível em:
 
-- **API Base**: `http://bff-bob-a-thon-env.eba-kipvpqnj.us-east-1.elasticbeanstalk.com`
-- **Swagger UI**: `http://bff-bob-a-thon-env.eba-kipvpqnj.us-east-1.elasticbeanstalk.com/api/swagger-ui/index.html`
-- **OpenAPI Spec**: `http://bff-bob-a-thon-env.eba-kipvpqnj.us-east-1.elasticbeanstalk.com/api/v3/api-docs`
+- **API Base**: `https://bff-bob-a-thon-env.eba-kipvpqnj.us-east-1.elasticbeanstalk.com`
+- **Swagger UI**: `https://bff-bob-a-thon-env.eba-kipvpqnj.us-east-1.elasticbeanstalk.com/api/swagger-ui/index.html`
+- **OpenAPI Spec**: `https://bff-bob-a-thon-env.eba-kipvpqnj.us-east-1.elasticbeanstalk.com/api/v3/api-docs`
+
+> ⚠️ **Certificado autoassinado**: o endpoint HTTPS utiliza um certificado autoassinado. Na primeira vez que acessar a API pelo browser, será necessário aceitar o aviso de segurança ("Avançado → Prosseguir"). Após isso, o frontend em HTTPS (GitHub Pages) consegue se comunicar normalmente com a API.
+
+### 🔒 Configuração HTTPS
+
+O ambiente AWS Elastic Beanstalk está configurado com HTTPS via:
+
+- **Load Balancer (ALB)**: listener na porta 443 com certificado importado no ACM
+- **Instância EC2**: nginx configurado com certificado autoassinado via `.platform/hooks/predeploy/01_gen_ssl.sh`
+- **Nginx**: servidor HTTPS em `.platform/nginx/conf.d/https.conf` fazendo proxy reverso para a aplicação na porta 5000
+
+O deploy é feito enviando apenas o JAR pré-compilado e os arquivos `.platform/`:
+
+```bash
+# Build do JAR
+mvn clean package -DskipTests
+cp target/bff-bob-a-thon-1.0.0.jar .
+
+# Deploy no Elastic Beanstalk
+eb deploy
+```
 
 📖 **Veja o guia completo de deploy e testes em [DEPLOYMENT.md](DEPLOYMENT.md)**
 

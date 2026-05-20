@@ -8,6 +8,8 @@
 - **Swagger UI**: `http://bff-bob-a-thon-env.eba-kipvpqnj.us-east-1.elasticbeanstalk.com/api/swagger-ui/index.html`
 - **OpenAPI Spec**: `http://bff-bob-a-thon-env.eba-kipvpqnj.us-east-1.elasticbeanstalk.com/api/v3/api-docs`
 
+> ⚠️ **Atenção**: A API está atualmente em HTTP. Para usar com frontend HTTPS (GitHub Pages), você precisa habilitar HTTPS. Veja o guia completo em [HTTPS_SETUP.md](HTTPS_SETUP.md).
+
 ### 📋 Endpoints Disponíveis
 
 #### 1. Listar Todos os Conteúdos
