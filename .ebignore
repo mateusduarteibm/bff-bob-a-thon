@@ -1,6 +1,8 @@
 # Ignorar tudo
 *
 
-# Exceto o JAR e o Procfile
+# Exceto o JAR, Procfile e configurações de plataforma
 !bff-bob-a-thon-1.0.0.jar
 !Procfile
+!.platform/
+!.platform/**
