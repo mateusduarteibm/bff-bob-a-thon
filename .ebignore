@@ -1,0 +1,6 @@
+# Ignorar tudo
+*
+
+# Exceto o JAR e o Procfile
+!bff-bob-a-thon-1.0.0.jar
+!Procfile
