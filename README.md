@@ -25,6 +25,7 @@ O BFF Bob-a-thon é uma API REST desenvolvida para gerenciar conteúdos educacio
 - ✅ CRUD de conteúdos (Create, Read, Delete)
 - ✅ Listagem de todos os conteúdos
 - ✅ Busca de conteúdo por ID
+- ✅ **Sistema de Favoritos** - Marcar/desmarcar conteúdos como favoritos
 - ✅ Validação de dados
 - ✅ Tratamento de erros padronizado
 - ✅ Documentação Swagger/OpenAPI
@@ -193,6 +194,20 @@ http://localhost:8080/api
 | GET | `/contents/{id}` | Buscar conteúdo por ID |
 | POST | `/contents` | Criar novo conteúdo |
 | DELETE | `/contents/{id}` | Deletar conteúdo |
+
+### Favoritos
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| POST | `/favorites` | Adicionar conteúdo aos favoritos |
+| GET | `/favorites/user/{userId}` | Listar favoritos do usuário |
+| GET | `/favorites/user/{userId}/content/{contentId}` | Verificar se está favoritado |
+| GET | `/favorites/user/{userId}/count` | Contar favoritos do usuário |
+| GET | `/favorites/{id}` | Buscar favorito por ID |
+| DELETE | `/favorites/{id}` | Remover favorito por ID |
+| DELETE | `/favorites/user/{userId}/content/{contentId}` | Remover favorito específico |
+
+📖 **Documentação completa da API de Favoritos**: [FAVORITES_API.md](FAVORITES_API.md)
 
 ### Tipos de Conteúdo
 
