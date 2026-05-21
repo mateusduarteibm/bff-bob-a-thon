@@ -1,6 +1,8 @@
 package com.hackathon.bffbobathon.adapter.input.exception;
 
 import com.hackathon.bffbobathon.domain.exception.ContentNotFoundException;
+import com.hackathon.bffbobathon.domain.exception.DuplicateFavoriteException;
+import com.hackathon.bffbobathon.domain.exception.FavoriteNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,46 @@ public class GlobalExceptionHandler {
                 .build();
         
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    /**
+     * Trata exceções de favorito não encontrado.
+     *
+     * @param ex exceção lançada
+     * @return resposta com status 404
+     */
+    @ExceptionHandler(FavoriteNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleFavoriteNotFound(FavoriteNotFoundException ex) {
+        log.error("Favorito não encontrado: {}", ex.getMessage());
+        
+        ErrorResponse error = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .error("Not Found")
+                .message(ex.getMessage())
+                .build();
+        
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    /**
+     * Trata exceções de favorito duplicado.
+     *
+     * @param ex exceção lançada
+     * @return resposta com status 409
+     */
+    @ExceptionHandler(DuplicateFavoriteException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateFavorite(DuplicateFavoriteException ex) {
+        log.error("Favorito duplicado: {}", ex.getMessage());
+        
+        ErrorResponse error = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .error("Conflict")
+                .message(ex.getMessage())
+                .build();
+        
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
     /**
